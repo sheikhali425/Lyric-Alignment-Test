@@ -1,0 +1,7 @@
+.karaoke { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-2); padding: var(--space-3) var(--space-4); min-height: 8.5rem; text-align: center; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+.karaoke p { margin: 0; max-width: 100%; overflow-wrap: anywhere; }
+.side { color: var(--text-muted); font-size: 1rem; min-height: 1.5em; opacity: 0.8; }
+.current { font-size: clamp(1.5rem, 3.2vw, 2.5rem); font-weight: 700; line-height: 1.2; color: var(--text); }
+.live { color: var(--accent); }
+.upcoming { color: var(--text-muted); font-style: italic; }
+.empty { color: var(--text-muted); }

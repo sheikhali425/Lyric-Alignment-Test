@@ -1,0 +1,1 @@
+export { Karaoke } from './Karaoke';

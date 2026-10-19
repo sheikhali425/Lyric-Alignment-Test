@@ -74,11 +74,9 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Padding only, so the placeholder is not glued into the corner. Drop it if
- * you want a full-bleed editor. */
+/* Full-bleed editor; App.module.css owns the layout. */
 #root {
-  min-height: 100%;
-  padding: var(--space-6);
+  height: 100%;
 }
 
 h1,

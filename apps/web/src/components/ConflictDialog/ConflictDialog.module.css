@@ -1,0 +1,28 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 600;
+  display: grid;
+  place-items: center;
+  padding: var(--space-4);
+  background: rgb(0 0 0 / 0.55);
+}
+.dialog {
+  width: min(620px, 100%);
+  max-height: calc(100vh - 2 * var(--space-4));
+  overflow: auto;
+  padding: var(--space-4);
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) * 2);
+  background: var(--bg);
+  box-shadow: 0 12px 48px rgb(0 0 0 / 0.35);
+}
+.lead { color: var(--text); }
+.diff { display: flex; flex-direction: column; gap: var(--space-3); margin-bottom: var(--space-4); }
+.sec h3 { font-size: 0.85rem; margin-bottom: var(--space-1); }
+.sec ul { margin: 0; padding-left: var(--space-4); font-size: 0.9rem; }
+.add { color: var(--accent); }
+.rem { color: var(--danger); }
+.more, .sec small { color: var(--text-muted); margin: 0; }
+.actions { display: flex; justify-content: flex-end; gap: var(--space-2); flex-wrap: wrap; }
+.primary { background: var(--accent); color: var(--accent-contrast); border-color: var(--accent); }

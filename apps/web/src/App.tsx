@@ -1,39 +1,81 @@
-import { useEffect, useState } from 'react';
-import { api, ApiError } from './api';
+import { useEffect, useRef } from 'react';
+import { ConflictDialog } from './components/ConflictDialog';
+import { Inspector } from './components/Inspector';
+import { Karaoke } from './components/Karaoke';
+import { LoadTrackDialog, useWindowAudioDrop } from './components/LoadTrackDialog';
+import { LyricsPane } from './components/LyricsPane';
+import { ShortcutsHelp } from './components/ShortcutsHelp';
+import { Timeline } from './components/Timeline/Timeline';
+import { Toaster } from './components/Toast';
+import { TopBar } from './components/TopBar';
+import { useEditorShortcuts } from './hooks/useEditorShortcuts';
+import { playback } from './state/playback';
+import { initSession, saveCurrent, useSession } from './state/session';
+import { useStore } from './state/store';
+import { view } from './state/view';
+import styles from './App.module.css';
 
-/**
- * Deliberately partial. These are the only fields this placeholder reads; the
- * payload has a good deal more in it. Type the rest as you need it.
- */
-type Track = {
-  title: string;
-  audio_url: string;
-  lines: unknown[];
-};
+const onSave = () => void saveCurrent();
 
 export default function App() {
-  const [track, setTrack] = useState<Track | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const audioUrl = useStore((s) => s.project?.audioUrl ?? null);
+  const hasProject = useStore((s) => s.project !== null);
+  const loading = useSession((s) => s.loading);
+  const loadError = useSession((s) => s.loadError);
+  const audioRef = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
-    let live = true;
-    api<Track>('/api/v1/track')
-      .then((t) => { if (live) setTrack(t); })
-      .catch((e: unknown) => {
-        if (!live) return;
-        setError(e instanceof ApiError ? `${e.message} ${JSON.stringify(e.body)}` : String(e));
-      });
-    return () => { live = false; };
+    void initSession();
   }, []);
 
-  if (error) return <p>{error}</p>;
-  if (!track) return <p>Loading…</p>;
+  // One <audio> element for the whole app; playback.ts is the only thing that touches it.
+  // Keyed on the URL below, so switching tracks gets a fresh element and a clean attach.
+  useEffect(() => playback.attach(audioRef.current), [audioUrl]);
+
+  useEditorShortcuts({ onSave });
+  useWindowAudioDrop();
 
   return (
-    <>
-      <h1>{track.title}</h1>
-      <p>{track.lines.length} lines</p>
-      <audio controls src={track.audio_url} />
-    </>
+    <div className={styles.app}>
+      {audioUrl && <audio key={audioUrl} ref={audioRef} src={audioUrl} preload="auto" hidden />}
+      {hasProject ? (
+        <>
+          <TopBar />
+          <main className={styles.main}>
+            <aside className={styles.lyrics}>
+              <LyricsPane />
+            </aside>
+            <section className={styles.center}>
+              <div className={styles.timeline}>
+                <Timeline />
+              </div>
+              <div className={styles.karaoke}>
+                <Karaoke />
+              </div>
+            </section>
+            <aside className={styles.inspector}>
+              <Inspector />
+            </aside>
+          </main>
+        </>
+      ) : (
+        <div className={styles.empty}>
+          {loading ? (
+            <p role="status">Loading…</p>
+          ) : (
+            <>
+              <p>{loadError ?? 'No track open.'}</p>
+              <button type="button" onClick={() => view.openModal('load')}>
+                Load a song
+              </button>
+            </>
+          )}
+        </div>
+      )}
+      <LoadTrackDialog />
+      <ConflictDialog />
+      <ShortcutsHelp />
+      <Toaster />
+    </div>
   );
 }

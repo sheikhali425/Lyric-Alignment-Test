@@ -1,0 +1,27 @@
+.inspector { display: flex; flex-direction: column; min-height: 0; overflow-y: auto; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: var(--space-3); gap: var(--space-2); }
+.title { margin: 0; font-size: 0.9375rem; }
+.body { display: flex; flex-direction: column; gap: var(--space-3); }
+.quote { margin: 0; padding-left: var(--space-3); border-left: 3px solid var(--accent); font-size: 1rem; overflow-wrap: anywhere; }
+.fields { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-2); }
+.field { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.field label, .shiftRow label { display: flex; flex-direction: column; gap: 2px; }
+.fieldLabel { font-size: 0.75rem; color: var(--text-muted); }
+.time { font-family: var(--font-mono); font-size: 0.8125rem; width: 100%; padding: var(--space-1) var(--space-2); }
+.invalid { border-color: var(--danger); }
+.error { font-size: 0.75rem; color: var(--danger); }
+.readout { font-family: var(--font-mono); font-size: 0.8125rem; padding: var(--space-1) 0; }
+.nudgeRow { display: flex; align-items: center; gap: var(--space-1); }
+.nudgeLabel { width: 3.5em; font-size: 0.75rem; color: var(--text-muted); }
+.nudgeRow button { padding: 2px var(--space-2); font-family: var(--font-mono); font-size: 0.75rem; }
+.actions { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.actions button { padding: var(--space-1) var(--space-2); font-size: 0.8125rem; }
+.danger { color: var(--danger); }
+.note { margin: 0; font-size: 0.8125rem; }
+.multi { margin: 0; color: var(--text); font-weight: 600; }
+.shiftRow { display: flex; align-items: flex-end; gap: var(--space-2); }
+.shiftRow label { flex: 1; }
+.help { margin: 0; padding-left: var(--space-4); font-size: 0.8125rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 2px; }
+.split { display: flex; flex-wrap: wrap; align-items: center; font-size: 0.875rem; gap: 2px 0; }
+.splitWord { display: inline-flex; align-items: center; }
+.gap { padding: 0 var(--space-1); margin: 0 1px; border: 1px dashed transparent; background: transparent; color: var(--text-muted); line-height: 1.2; }
+.gap:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }

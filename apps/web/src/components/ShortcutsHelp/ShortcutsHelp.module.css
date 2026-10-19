@@ -1,0 +1,36 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: var(--space-4);
+  background: rgba(0, 0, 0, 0.45);
+}
+.dialog {
+  width: min(680px, 100%);
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--border);
+}
+.head h2 { margin: 0; }
+.body { overflow: auto; padding: var(--space-3) var(--space-4) var(--space-4); }
+.body h3 { margin: var(--space-4) 0 var(--space-2); font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-muted); }
+.list { margin: 0; }
+.row { display: grid; grid-template-columns: 210px 1fr; gap: var(--space-3); padding: 3px 0; align-items: baseline; }
+.row dt { white-space: nowrap; }
+.row dd { margin: 0; color: var(--text); }
+.or { color: var(--text-muted); font-size: 0.8em; }
+@media (max-width: 560px) { .row { grid-template-columns: 1fr; gap: 0; } }

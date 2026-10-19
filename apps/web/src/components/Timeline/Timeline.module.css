@@ -1,0 +1,182 @@
+.root {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  min-width: 0;
+}
+.empty {
+  padding: var(--space-4);
+  color: var(--text-muted);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+}
+.scroll {
+  overflow: auto;
+  max-height: 420px;
+  /* Room for an overlay scrollbar, which would otherwise sit on the bottom row of blocks. */
+  padding-bottom: 12px;
+  position: relative;
+}
+.content {
+  position: relative;
+  min-width: 100%;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.sticky {
+  position: sticky;
+  left: 0;
+  display: block;
+}
+.ruler {
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  touch-action: none;
+}
+.wave {
+  position: relative;
+  cursor: pointer;
+  touch-action: none;
+}
+.notice {
+  position: sticky;
+  left: var(--space-2);
+  top: 0;
+  margin-top: calc(-1 * var(--waveH, 96px));
+  width: max-content;
+  max-width: calc(100% - 16px);
+  padding: 2px var(--space-2);
+  font-size: 12px;
+  color: var(--text-muted);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  pointer-events: none;
+  transform: translateY(8px);
+}
+.lane {
+  position: relative;
+  border-top: 1px solid var(--border);
+  background: color-mix(in srgb, var(--text) 3%, var(--surface));
+  touch-action: none;
+}
+.block {
+  position: absolute;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 4px;
+  border: 1px solid color-mix(in srgb, var(--accent) 55%, var(--surface));
+  background: color-mix(in srgb, var(--accent) 22%, var(--surface));
+  color: var(--text);
+  font-size: 12px;
+  cursor: grab;
+  touch-action: none;
+}
+.block:active {
+  cursor: grabbing;
+}
+.block:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+.block[data-selected] {
+  background: var(--accent);
+  color: var(--accent-contrast);
+  border-color: var(--text);
+}
+.block[data-cursor]::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: repeating-linear-gradient(90deg, var(--text) 0 4px, transparent 4px 8px);
+  opacity: 0.55;
+  pointer-events: none;
+}
+.label {
+  flex: 1;
+  min-width: 0;
+  padding: 0 var(--space-2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  pointer-events: none;
+}
+.num {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  opacity: 0.7;
+  margin-right: 6px;
+}
+.edge {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  cursor: ew-resize;
+  z-index: 1;
+}
+.edge:hover {
+  background: color-mix(in srgb, var(--text) 30%, transparent);
+}
+.edgeEnd {
+  left: auto;
+  right: 0;
+}
+.ghost {
+  position: absolute;
+  box-sizing: border-box;
+  border: 1px dashed var(--text-muted);
+  border-radius: 4px;
+  pointer-events: none;
+}
+.marquee {
+  position: absolute;
+  border: 1px solid var(--accent);
+  background: color-mix(in srgb, var(--accent) 15%, transparent);
+  pointer-events: none;
+  z-index: 3;
+}
+.guide,
+.drop {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  pointer-events: none;
+  z-index: 4;
+}
+.guide {
+  border-left: 1px solid var(--danger);
+}
+.drop {
+  border-left: 2px solid var(--accent);
+}
+.tip {
+  position: absolute;
+  z-index: 6;
+  transform: translateX(-50%);
+  padding: 2px var(--space-2);
+  font: 11px var(--font-mono);
+  white-space: nowrap;
+  color: var(--bg);
+  background: var(--text);
+  border-radius: var(--radius);
+  pointer-events: none;
+}
+.playhead {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  border-left: 2px solid var(--danger);
+  will-change: transform;
+  pointer-events: none;
+  z-index: 5;
+}

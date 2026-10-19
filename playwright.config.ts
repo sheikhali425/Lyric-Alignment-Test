@@ -1,5 +1,8 @@
 import { defineConfig, devices } from '@playwright/test';
 
+// Same override as apps/web/vite.config.ts; default matches the README.
+const WEB_PORT = Number(process.env.WEB_PORT ?? 5173);
+
 /**
  * Brings up both dev servers and runs the one test. The API server is started
  * with `start` rather than `dev` because `dev` runs under `node --watch`, whose
@@ -10,12 +13,14 @@ import { defineConfig, devices } from '@playwright/test';
  */
 export default defineConfig({
   testDir: './e2e',
+  // Pure unit specs run under e2e/unit.config.ts, without servers.
+  testIgnore: /\.unit\.spec\.ts$/,
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 1 : 0,
   reporter: [['list']],
   use: {
-    baseURL: 'http://localhost:5173',
+    baseURL: `http://localhost:${WEB_PORT}`,
     trace: 'on-first-retry',
   },
   projects: [{ name: 'chromium', use: { ...devices['Desktop Chrome'] } }],
@@ -28,7 +33,7 @@ export default defineConfig({
     },
     {
       command: 'pnpm --filter @fixture/web run dev',
-      port: 5173,
+      port: WEB_PORT,
       reuseExistingServer: !process.env.CI,
       timeout: 60_000,
     },
