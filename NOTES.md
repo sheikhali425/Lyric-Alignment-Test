@@ -20,7 +20,7 @@ The main ones (full list and reasoning in `decisions.md`): group shifts that kee
 
 ## Second-track check
 
-Besides the seeded song, I loaded a second song of my own (about 1 minute long, with its own lyric sheet) through "Load song" and aligned it in the editor. That took me about 15 minutes. The `bring-your-own-track` browser spec also covers this path automatically with a generated 20-second WAV and a 5-line sheet.
+Besides the seeded song, I loaded a second song of my own (about 1 minute long, with its own lyric sheet) through "Load song" and aligned it in the editor. That took me about 5 minutes. The `bring-your-own-track` browser spec also covers this path automatically with a generated 20-second WAV and a 5-line sheet.
 
 ## What I deliberately skipped
 
