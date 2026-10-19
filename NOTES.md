@@ -18,6 +18,10 @@ I built this with AI coding agents writing most of the code. I made the main pro
 
 The main ones (full list and reasoning in `decisions.md`): group shifts that keep spacing, with a burst of nudges as one undo step; seeded track saved to the server while imported tracks stay in the browser (the API can't create tracks); the Keep mine / Use server's conflict dialog; click a timed line to play it, click an untimed line to stamp it next; the keyboard map.
 
+## Second-track check
+
+Besides the seeded song, I loaded a second song of my own (about 1 minute long, with its own lyric sheet) through "Load song" and aligned it in the editor. That took me about 15 minutes. The `bring-your-own-track` browser spec also covers this path automatically with a generated 20-second WAV and a 5-line sheet.
+
 ## What I deliberately skipped
 
 - Merging conflicting changes line by line.
